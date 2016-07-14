@@ -39,5 +39,5 @@ def outputter(node, level)
 end
 
 
-root = parser_script("sample.html")
-outputter(root,-1)
+# root = parser_script("sample.html")
+# outputter(root,-1)
