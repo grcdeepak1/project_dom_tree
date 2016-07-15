@@ -11,8 +11,18 @@
 require 'pry'
 require_relative "dom_loader.rb"
 
-Node  = Struct.new(:tag, :close_tag, :classes, :name, :id, :src, :title, :text, :inline, :children, :parent)
-class Node
+class Node  < Struct.new(:tag, :close_tag, :classes, :name, :id, :src, :title, :text, :inline, :children, :parent)
+  def to_s
+    if !tag.nil?
+      str = "tag - #{tag}"
+      str += "\tclasses - #{classes}" if !classes.nil?
+      str += "\tid - #{id}" if !id.nil?
+    elsif !close_tag.nil?
+      "close_tag - #{close_tag}"
+    else
+      "text - #{text}"
+    end
+  end
   class << self
     alias_method :old_new, :new
     def new(*args)
@@ -117,15 +127,15 @@ class DOMReader
 
 end
 
-dom_array = DOMLoader.new.load("sample.html")
-dom_reader = DOMReader.new
-dom_reader.build_tree(dom_array)
-puts
-# dom_reader.outputter(dom_reader.root, -1)
-# str = "Before text <span>mid text (not included in text attribute of the paragraph tag)</span> after text."
-# p dom_reader.parse_line(str)
-# arr = dom_reader.inline_tag_process(str)
-# p arr
+# dom_array = DOMLoader.new.load("sample.html")
+# dom_reader = DOMReader.new
+# dom_reader.build_tree(dom_array)
 # puts
+# # dom_reader.outputter(dom_reader.root, -1)
+# # str = "Before text <span>mid text (not included in text attribute of the paragraph tag)</span> after text."
+# # p dom_reader.parse_line(str)
+# # arr = dom_reader.inline_tag_process(str)
+# # p arr
+# # puts
 
 
