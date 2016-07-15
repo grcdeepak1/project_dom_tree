@@ -13,7 +13,7 @@ describe DOMLoader do
   describe "#load" do
     it "loads sample file" do
       subject.load("sample.html")
-      expect(subject.dom_array.size).to eq 10
+      expect(subject.dom_array.size).to eq 13
     end
     it "loads test file" do
       subject.load("test.html")
