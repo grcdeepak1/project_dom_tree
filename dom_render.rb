@@ -47,11 +47,11 @@ class DOMRender
 end
 
 
-dom_array = DOMLoader.new.load("sample.html")
-dom_reader = DOMReader.new
-dom_tree = dom_reader.build_tree(dom_array)
+# dom_array = DOMLoader.new.load("sample.html")
+# dom_reader = DOMReader.new
+# dom_tree = dom_reader.build_tree(dom_array)
 
-renderer = DOMRender.new(dom_tree)
-renderer.render(renderer.root.children[0])
+# renderer = DOMRender.new(dom_tree)
+# renderer.render(renderer.root.children[0].children[3])
 
 # renderer.outputter(renderer.root, -1)

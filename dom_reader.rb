@@ -17,6 +17,7 @@ class Node  < Struct.new(:tag, :close_tag, :classes, :name, :id, :src, :title, :
       str = "tag - #{tag}"
       str += "\tclasses - #{classes}" if !classes.nil?
       str += "\tid - #{id}" if !id.nil?
+      str
     elsif !close_tag.nil?
       "close_tag - #{close_tag}"
     else

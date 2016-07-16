@@ -10,8 +10,8 @@ class DOMLoader
       File.readlines(path).each do |line|
       @dom_array << line
     end
-      puts "File was successfully loaded from #{path}"
-      puts "Your dom_array contains #{@dom_array.size} entries"
+      # puts "File was successfully loaded from #{path}"
+      # puts "Your dom_array contains #{@dom_array.size} entries"
     rescue
       puts "Wrong filename #{path}, please try again with a valid file"
     end
