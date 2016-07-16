@@ -30,15 +30,35 @@ class DOMRender
     dict
   end
 
+  def output(node, str)
+    if node.inline == true || node.inline == :inline_first
+      print str
+    elsif node.inline == false
+      print "#{str}\n"
+    else
+      puts str
+    end
+  end
+
   def outputter(node, level)
+    str = ""
     if node.tag == "document"
     elsif !node.tag.nil?
-      puts "  "*level +"<#{node.tag}>"
+      str += "  "*level if node.inline.nil?
+      str += " " if !node.inline.nil?
+      str += "<#{node.tag}"
+      str += " class='#{node.classes.join( ' ' ) }'" if !node.classes.nil?
+      str += " id='#{node.id}'" if !node.id.nil?
+      str += ">"
     elsif !node.close_tag.nil?
-      puts "  "*level + "</#{node.close_tag}>"
+      str += "  "*level if node.inline.nil?
+      str += "</#{node.close_tag}>"
+      str += " " if !node.inline.nil?
     elsif !node.text.nil?
-      puts "  "*level + "#{node.text}"
+      str += "  "*level if node.inline.nil? || node.inline == :inline_first
+      str += "#{node.text.strip}"
     end
+    output(node, str)
     node.children.each do |child|
       outputter(child, level+1)
     end
@@ -55,3 +75,17 @@ end
 # renderer.render(renderer.root.children[0].children[3])
 
 # renderer.outputter(renderer.root, -1)
+
+# <div class='hey sidebar' id='amazing'>
+#   div text before
+#   <p>
+#     p text
+#   </p>
+#   <p class='sidebar'>
+#     I'm an inner div!!! I might just <em>emphasize</em> some text
+#   </p>
+#   <div>
+#     more div text
+#   </div>
+#   div text after
+# </div>

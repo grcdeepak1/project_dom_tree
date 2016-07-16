@@ -109,6 +109,7 @@ class DOMReader
       arr << node
     end
     arr.last.inline = false
+    arr.first.inline = :inline_first
     arr
   end
 
